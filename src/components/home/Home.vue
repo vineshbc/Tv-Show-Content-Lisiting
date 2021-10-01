@@ -1,22 +1,17 @@
 <template>
-  <h1>Season Listing</h1>
-  <div class="container-main">
-    <div
-      class="container-section"
-      v-for="(seasonData, index) in groupbySeason"
-      :key="index"
-    >
-      <h2>Season {{ seasonData[index].season }}</h2>
+  <div class="home--main" @scroll="scrollFunc">
+    <h1>Season Listing</h1>
+    <div class="container-main">
+      <div
+        class="container-section"
+        v-for="(seasonData, index) in groupbySeason"
+        :key="index"
+      >
+        <h2>Season {{ seasonData[index].season }}</h2>
 
-      <EpisodeDesc :episodeLists="seasonData">
-        <template v-slot:btn1>
-          <button>Button 1</button>
-        </template>
-                <template v-slot:btn2>
-          <button>Button 2</button>
-        </template>
-
-      </EpisodeDesc>
+        <EpisodeDesc :episodeLists="seasonData" @trigger-name="receiveEvent">
+        </EpisodeDesc>
+      </div>
     </div>
   </div>
 </template>
@@ -51,9 +46,23 @@ export default {
     console.log(this.episodeLists);
   },
 
-  methods: {},
+  methods: {
+    mainFunc(name) {
+      alert(name);
+    },
+    receiveEvent(name) {
+      alert(name);
+    },
+    scrollFunc(event) {
+      console.log(event);
+    },
+  },
 };
 </script>
 
-<style>
+<style >
+.home--main {
+  height: 80vh;
+  overflow: auto;
+}
 </style>

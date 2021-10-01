@@ -1,16 +1,15 @@
 <template>
   <div class="container--episode">
     <div class="section" v-for="(episode, index) in episodeLists" :key="index">
-      <div class="card">
-        <img :src="episodeImage(episode)" alt="images" style="width: 100%" />
-        <p class="info" style="font-weight:700">Episode {{ episode.number }}</p>
-        <p class="info" style="font-weight:500;color:#372768">{{ episode.name }}</p>
-        <div class="desc info" v-html="episode.summary"></div>
-        <div class="btn-comp">
-          <slot name="btn1"></slot>
-          <slot name="btn2"></slot>
+
+        <div class="card" @click="getContent(episode)">
+          <img :src="episodeImage(episode)" alt="images" style="width: 100%" />
+          <p class="info" style="font-weight: 700">
+            Episode {{ episode.number }}
+          </p>
+          <p class="info" style="font-weight: 500">{{ episode.name }}</p>
+          <div class="desc info" v-html="episode.summary"></div>
         </div>
-      </div>
     </div>
   </div>
 </template>
@@ -20,7 +19,6 @@ export default {
   data() {
     return {};
   },
-
   props: {
     episodeLists: {
       type: Object,
@@ -31,6 +29,10 @@ export default {
     episodeImage(episode) {
       return episode && episode.image && episode.image.medium;
     },
+
+    getContent(episode){
+      this.$router.push({name:'detailpage',params:{id:episode.id,details:JSON.stringify(episode)}})
+    }
   },
 };
 </script>

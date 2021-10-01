@@ -1,11 +1,13 @@
 <template>
   <div class="main">
-  <Home/>
+    <router-view/>
+    <!-- <Home/> -->
   </div>
 </template>
 
 <script>
-import Home from './components/home/Home.vue';
+// import Home from './components/home/Home.vue';
+// import TabMain from './components/tab/TabMain.vue';
 export default {
   name: "App",
   data() {
@@ -14,8 +16,21 @@ export default {
     };
   },
   components:{
-    Home
-  }
+    // Home,
+    // TabMain
+  },
+  created(){
+    let userData = localStorage.getItem('userData')
+    if(!userData){
+      this.$router.push({name:"login"})
+    }
+  },
+  // watch:{
+  //   $route(to,from){
+  //     console.log("to route",to)
+  //     console.log("form route",from)
+  //   }
+  // }
 };
 </script>
 
